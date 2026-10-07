@@ -103,7 +103,7 @@ export default defineConfig(({ mode }) => {
   // URL Vite emits (`/@vite/client`, `/src/...`, `/@fs/...`) is prefixed
   // with this base, so the runtime proxy route matches. Fall back to "./"
   // for non-session contexts (e.g., `bun run build` on a dev machine).
-  const base = env.VITE_BASE || "./";
+  const base = env.VITE_BASE || (mode === "github-pages" ? "/bass-fretboard-note-trainer/" : "./");
   // Intentional: visible at dev-server startup so we can confirm which base Vite
   // is actually using when debugging proxy issues. Safe to leave in — only runs
   // once per `vite` invocation.

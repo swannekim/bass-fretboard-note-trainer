@@ -49,6 +49,7 @@ npm run dev
 |---|---|
 | `npm run dev` | 개발 서버 (코드를 고치면 바로 반영) |
 | `npm run build` | 배포용 파일을 `dist/`에 만들기 |
+| `npm run build:pages` | GitHub Pages용 파일을 `dist/`에 만들기 (해시 라우팅) |
 | `npm run preview` | 만든 `dist/`를 미리 보기 |
 | `npm run typecheck` | 타입 검사 |
 | `npm run lint` | 코드 스타일 검사 |
@@ -58,7 +59,29 @@ npm run dev
 ### 휴대폰에서 쓰려면
 - PC와 휴대폰이 같은 Wi-Fi일 때 `npm run dev -- --host`로 띄우고, 휴대폰에서 터미널에 나온 Network 주소를 열면 지판·퀴즈를 바로 써볼 수 있어요.
 - **조율 탭의 마이크는 HTTPS 주소(또는 localhost)에서만 켜져요.** 휴대폰에서 조율까지 쓰려면 HTTPS로 배포하세요.
-- 배포할 때는 `/quiz`, `/tuner` 주소로 바로 들어오거나 새로고침해도 열리도록, 모든 경로를 `index.html`로 돌려주는 설정(호스팅 서비스의 SPA / rewrite 설정)을 켜 주세요.
+- 일반 빌드(`npm run build`)를 배포할 때는 `/quiz`, `/tuner` 주소로 바로 들어오거나 새로고침해도 열리도록, 모든 경로를 `index.html`로 돌려주는 설정(호스팅 서비스의 SPA / rewrite 설정)을 켜 주세요. GitHub Pages용 빌드는 아래처럼 별도로 제공해요.
+
+### GitHub Pages
+
+npm은 빌드할 때만 필요해요. GitHub Pages에는 완성된 HTML·CSS·JavaScript만 올라가며, 별도 Node.js 서버나 Bun은 필요하지 않아요.
+
+- 사이트: https://swannekim.github.io/bass-fretboard-note-trainer/
+- 퀴즈: https://swannekim.github.io/bass-fretboard-note-trainer/#/quiz
+- 조율: https://swannekim.github.io/bass-fretboard-note-trainer/#/tuner
+
+Pages 빌드는 `#/quiz`, `#/tuner`처럼 해시 라우팅을 사용해요. 링크를 직접 열거나 새로고침해도 서버 rewrite나 `404.html` 우회 없이 동작해요. HTTPS이므로 조율 탭에서 마이크 권한을 허용하면 마이크를 사용할 수 있어요.
+
+저장소의 **Settings → Pages → Build and deployment → Source**를 **GitHub Actions**로 설정하세요. `.github/workflows/deploy-pages.yml`이 `main`에 push할 때마다 npm 설치·타입 검사·Pages 빌드 후 `dist/`를 배포해요. **Actions → Deploy GitHub Pages → Run workflow**로 수동 배포도 가능해요.
+
+로컬에서 Pages용 빌드를 미리 보려면:
+
+```bash
+npm ci
+npm run build:pages
+npm run preview -- --base=/bass-fretboard-note-trainer/
+```
+
+http://localhost:4173/bass-fretboard-note-trainer/ 에서 확인하세요. 자동 배포는 Pages 설정의 경로를 사용하고, 수동 빌드의 기본 경로는 `/bass-fretboard-note-trainer/`예요. 다른 경로는 Vite의 `--base` 옵션으로 지정할 수 있어요. 기존 `npm run dev`와 `npm run build`의 라우팅 방식은 그대로예요.
 
 ## 코드 구조
 

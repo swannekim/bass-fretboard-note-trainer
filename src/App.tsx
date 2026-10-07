@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { MotionConfig } from "motion/react";
 import { ErrorBoundary } from "@/components/error-boundary";
@@ -42,7 +42,10 @@ function getRouterBasename(): string {
   const parts = window.location.pathname.split("/").filter(Boolean);
   return parts.length ? `/${parts[0]}/` : "/";
 }
-const ROUTER_BASENAME = getRouterBasename();
+// Pages serves static files without SPA rewrites; keep routes in the fragment.
+const IS_GITHUB_PAGES = import.meta.env.MODE === "github-pages";
+const AppRouter = IS_GITHUB_PAGES ? HashRouter : BrowserRouter;
+const ROUTER_BASENAME = IS_GITHUB_PAGES ? undefined : getRouterBasename();
 
 // Route PATTERNS for the app-view signal (never pathnames). Computed once so
 // the signal effect does not re-run on every App render.
@@ -61,7 +64,7 @@ export function App() {
       <QueryClientProvider client={queryClient}>
         <MotionConfig reducedMotion="user">
           <ConfirmDialogProvider>
-            <BrowserRouter basename={ROUTER_BASENAME}>
+            <AppRouter basename={ROUTER_BASENAME}>
               <Routes>
                 <Route path="/" element={<AppShell />}>
                   {routes.map((r) =>
@@ -75,7 +78,7 @@ export function App() {
                 </Route>
               </Routes>
               {APP_VIEW_PREVIEW_MOUNT && <AppViewSignal patterns={APP_VIEW_ROUTE_PATTERNS} />}
-            </BrowserRouter>
+            </AppRouter>
           </ConfirmDialogProvider>
         </MotionConfig>
       </QueryClientProvider>

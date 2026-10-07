@@ -8,6 +8,14 @@ export function TrainerTabs() {
     <>
       <a
         href="#bft-content"
+        onClick={(event) => {
+          const content = document.getElementById("bft-content");
+          if (content) {
+            event.preventDefault();
+            content.focus();
+            content.scrollIntoView({ block: "nearest" });
+          }
+        }}
         className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-full focus:bg-primary focus:px-3 focus:py-1.5 focus:text-xs focus:font-semibold focus:text-primary-foreground"
       >
         본문으로 건너뛰기
