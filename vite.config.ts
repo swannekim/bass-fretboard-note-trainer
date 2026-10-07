@@ -1,4 +1,5 @@
 import path from "path";
+import { readFileSync } from "node:fs";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig, loadEnv, searchForWorkspaceRoot } from "vite";
@@ -92,6 +93,26 @@ function devWsMute(): Plugin {
   };
 }
 
+function distributionLicenses(root: string): Plugin {
+  return {
+    name: "distribution-licenses",
+    apply: "build",
+    generateBundle() {
+      const files = [
+        ["LICENSE.txt", "LICENSE"],
+        ["GEIST_LICENSE.txt", "node_modules/@fontsource-variable/geist/LICENSE"],
+      ];
+      for (const [fileName, sourcePath] of files) {
+        this.emitFile({
+          type: "asset",
+          fileName,
+          source: readFileSync(path.resolve(root, sourcePath), "utf8"),
+        });
+      }
+    },
+  };
+}
+
 export default defineConfig(({ mode }) => {
   // Use process.cwd() not __dirname — ESM configs bundled by Vite can't rely on
   // __dirname, but `cd app && bun run dev` makes cwd === app/ reliably.
@@ -110,8 +131,9 @@ export default defineConfig(({ mode }) => {
   console.log(`[vite.config] mode=${mode} envDir=${envDir} base=${base} reload=sse`);
 
   return {
-    plugins: [react(), tailwindcss(), devReloadSSE(), devWsMute()],
+    plugins: [react(), tailwindcss(), devReloadSSE(), devWsMute(), distributionLicenses(envDir)],
     base,
+    esbuild: { legalComments: "inline" },
     // Vite's default cacheDir is `node_modules/.vite`, but in the aether
     // orchestrator container node_modules is a root-owned bind mount while
     // vite runs as uid 1500 (cowork). Writing there fails with EACCES during
@@ -153,9 +175,11 @@ export default defineConfig(({ mode }) => {
     build: {
       outDir: "dist",
       emptyOutDir: true,
+      license: { fileName: "THIRD_PARTY_LICENSES.txt" },
       write: process.env.VITE_CHECK_MODE !== "true",
       rollupOptions: {
         output: {
+          banner: "/*! Bass Fretboard Note Trainer | Copyright (C) 2026 swannekim\n * SPDX-License-Identifier: AGPL-3.0-only\n * Source: https://github.com/swannekim/bass-fretboard-note-trainer\n * No warranty. Third-party components retain their own licenses.\n */",
           // Produce one JS chunk (no code-splitting on dynamic
           // imports). A single chunk benefits small SPAs (one network
           // round-trip for first paint, no async chunk waterfall). Flip

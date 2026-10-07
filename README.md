@@ -108,3 +108,21 @@ http://localhost:4173/bass-fretboard-note-trainer/ 에서 확인하세요. 자�
 나머지(`src/components/ui/`, `src/lib/`의 다른 파일, `vite.config.ts`, `vite-dev-reload.ts` 등)는 앱 템플릿의 기본 구성이에요. 그중 일부는 이 앱을 처음 만든 미리보기·게시 환경과 연결하는 코드예요.
 
 기술: React 19 · TypeScript · Vite 7 · Tailwind CSS 4 · Zustand · React Router 7 · lucide-react · Web Audio API
+
+## License
+
+Copyright (C) 2026 swannekim.
+
+이 프로젝트의 자체 코드는 **GNU Affero General Public License version 3 only (`AGPL-3.0-only`)**로 제공합니다. 전체 조건은 [LICENSE](LICENSE)를 참고하세요.
+
+- **상업적 사용도 허용합니다.** 비상업 전용 라이선스가 아닙니다.
+- 라이선스에 따라 사용·수정·재배포할 수 있으며, 저작권·라이선스 고지를 유지해야 합니다.
+- 배포 시 라이선스가 적용되는 코드의 해당 소스를 AGPL 조건에 따라 제공해야 합니다.
+- 수정본을 네트워크를 통해 제공하면, 그 수정본과 상호작용하는 이용자에게 해당 소스를 받을 수 있는 방법을 제공해야 합니다.
+- 프로그램은 **어떠한 보증도 없이** 제공됩니다. 정확한 권리·의무와 면책 범위는 라이선스 전문을 따릅니다.
+
+원본 소스: https://github.com/swannekim/bass-fretboard-note-trainer
+
+앱의 모든 탭에서 **소스 · AGPL** 링크로 소스와 라이선스를 확인할 수 있습니다. 포크한 수정본을 배포할 때는 `src/components/trainer-tabs.tsx`의 링크와 `vite.config.ts`의 소스 안내를 **실제로 제공하는 수정본의 해당 소스**로 변경하세요. 이 저장소를 가리키는 것만으로 수정본의 소스 제공 의무가 충족되지는 않습니다.
+
+기존 템플릿·외부 라이브러리·폰트 등 제3자 구성요소의 기존 라이선스와 저작권 고지는 유지됩니다. 이 프로젝트의 라이선스가 제3자 구성요소의 원래 라이선스를 대체하지 않습니다. 빌드는 앱 라이선스(`LICENSE.txt`), Vite가 수집한 번들 의존성 고지(`THIRD_PARTY_LICENSES.txt`), Geist 폰트의 OFL 고지(`GEIST_LICENSE.txt`)를 `dist/`에 포함합니다.

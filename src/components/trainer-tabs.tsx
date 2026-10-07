@@ -40,6 +40,15 @@ export function TrainerTabs() {
             {label}
           </NavLink>
         ))}
+        <a
+          href="https://github.com/swannekim/bass-fretboard-note-trainer#license"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="소스 코드 및 AGPL-3.0 라이선스 (새 탭)"
+          className="inline-flex h-8 items-center rounded-full px-2 text-[10px] font-semibold whitespace-nowrap text-muted-foreground transition-colors outline-none hover:bg-accent hover:text-accent-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+        >
+          소스 · AGPL
+        </a>
       </nav>
     </>
   );
