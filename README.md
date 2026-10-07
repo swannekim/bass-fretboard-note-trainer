@@ -1,79 +1,81 @@
 # Bass Fretboard Note Trainer
 
-4현 베이스(표준 튜닝 E·A·D·G) 지판 연습 앱이에요. 휴대폰을 가로로 눕혀서 쓰도록 만들었고, 탭이 세 개 있어요.
+**English** | [한국어](README-KR.md)
 
-| 탭 | 주소 | 하는 일 |
+A fretboard practice app for a four-string bass in standard tuning (E·A·D·G). Designed for phones in landscape orientation, it has three tabs.
+
+| Tab | Route | What it does |
 |---|---|---|
-| 지판 | `/` | 줄·프렛을 누르면 그 음이 소리 나요 |
-| 퀴즈 | `/quiz` | 음이름을 보고 지판에서 위치를 찾아요 |
-| 조율 | `/tuner` | 마이크로 개방현 E·A·D·G 음정을 맞춰요 |
+| Fretboard | `/` | Tap a string or fret to hear its note |
+| Quiz | `/quiz` | Find a note on the fretboard from its name |
+| Tuner | `/tuner` | Use the microphone to tune the open E·A·D·G strings |
 
-## 기능
+## Features
 
-### 지판
-- 연주자가 내려다보는 방향: 맨 위 1번줄 G → 맨 아래 4번줄 E. 너트는 왼쪽이고 **좌우 반전**으로 바꿀 수 있어요.
-- 개방현 + 1–12프렛. 누르면 그 음을 브라우저에서 합성해 들려줘요(Karplus–Strong 방식, 오디오 파일 없음). 여러 손가락으로 동시에 눌러도 돼요.
-- 라벨: 자연음 → 전체 ♯♭ → 숨김. 임시표는 ♯ 이름을 위, ♭ 이름을 아래에 함께 표시해요(예: C♯ / D♭).
-- 누를 때마다 위쪽에 "A · 3번줄 5프렛"처럼 답이 나와요.
-- **옥타브 ↑**(휴대폰 스피커용), **전체화면**.
+### Fretboard
+- Player's-eye view: string 1 (G) at the top, string 4 (E) at the bottom. The nut is on the left; use **Mirror** to reverse the layout.
+- Open strings and frets 1–12. Notes are synthesized in the browser using the Karplus–Strong method, with no audio files. Supports simultaneous multi-touch playing.
+- Labels cycle through natural notes, all notes with ♯/♭, and hidden. Accidentals show the sharp name above the flat name, such as C♯ / D♭.
+- Each tap displays the note and position at the top, such as "A · string 3, fret 5."
+- **Octave up** for phone speakers and **Fullscreen**.
 
-### 퀴즈
-- 라벨을 숨긴 지판에서, 화면에 뜬 음이름의 자리를 찾아 눌러요.
-- 설정: 범위(0–5 / 0–12프렛), 음(7음 전체 / E·F·G / A·B·C), 문제 수(7 / 10 / 20), 타이머 표시.
-- 채점: 3초 안에 맞히면 ◎, 3초가 넘으면 ○, 틀리면 X. 같은 음이면 어느 자리를 눌러도 정답이에요.
-- 틀리면 대표 위치를 3번 누른 뒤 넘어가고, 그 음은 몇 문제 뒤 다시 나와요.
-- 결과: ◎/○/X 개수, 평균 시간, 목표(10문제 기준 ◎ 5개 이상) 달성 여부, 음별 결과표, 더 연습할 음, **틀린 음만 다시**.
-- 대표 위치: E 4번줄 개방 · F 4번줄 1프렛 · G 4번줄 3프렛 · A 3번줄 개방 · B 3번줄 2프렛 · C 3번줄 3프렛 · D 2번줄 개방.
+### Quiz
+- Find and tap the displayed note on a fretboard with hidden labels.
+- Settings: fret range (0–5 / 0–12), note set (all seven natural notes / E·F·G / A·B·C), question count (7 / 10 / 20), and timer visibility.
+- Scoring: ◎ for a correct answer within 3 seconds, ○ for a correct answer after 3 seconds, and X for an incorrect answer. Any position with the requested note is accepted.
+- After a mistake, tap the highlighted reference position three times before continuing. The same note returns a few questions later.
+- Results include ◎/○/X counts, average response time, whether the target was met (at least five ◎ answers in a 10-question quiz), per-note results, notes needing more practice, and **Retry missed notes**.
+- Reference positions: E = string 4 open; F = string 4, fret 1; G = string 4, fret 3; A = string 3 open; B = string 3, fret 2; C = string 3, fret 3; D = string 2 open.
 
-### 조율
-- 튕긴 줄을 자동으로 찾아요. 줄 이름을 누르면 그 줄만 듣도록 고정돼요(많이 풀린 줄을 맞출 때).
-- 바늘 미터(±50센트): 가운데 초록 ±5센트, 노랑 ±25센트, 그 밖은 빨강.
-- 낮으면 **올리세요**(줄을 조이세요), 높으면 **내리세요**(줄을 푸세요).
-- ±5센트 안에 0.7초 머물면 그 줄 **통과**. 4줄 모두 통과하면 알려줘요.
-- 줄마다 기준음 버튼이 있어요. 기준음이 나는 동안은 휴대폰 자기 소리를 판정하지 않도록 잠깐 듣기를 멈춰요.
-- 음정 검출은 YIN 알고리즘이에요. 휴대폰 마이크가 잘 못 잡는 저음 E(41 Hz)도 배음으로 계산해요.
-- 마이크는 버튼을 눌렀을 때만 켜지고, **마이크 끄기**를 누르거나 다른 탭으로 가면 꺼져요.
+### Tuner
+- Automatically detects the string you pluck. Tap a string name to lock onto that string, which is useful when it is far out of tune.
+- Needle meter (±50 cents): green within ±5 cents, yellow within ±25 cents, and red beyond that.
+- If the pitch is low, **Tune up** by tightening the string. If it is high, **Tune down** by loosening it.
+- A string **passes** after staying within ±5 cents for 0.7 seconds. The app notifies you when all four strings have passed.
+- Each string has a reference-tone button. Pitch detection pauses briefly during playback so the tuner does not judge the phone's own sound.
+- Uses the YIN pitch-detection algorithm. Harmonics help detect the low E (41 Hz), which phone microphones can struggle to pick up.
+- The microphone starts only when you press the button. It stops when you select **Turn off microphone** or switch to another tab.
 
-## 실행 방법
+## Getting started
 
-필요한 것: Node.js 20.19 이상(22 LTS 권장)
+Requirements: Node.js 20.19 or later (22 LTS recommended).
 
 ```bash
 npm install
 npm run dev
 ```
 
-터미널에 나오는 주소(기본 http://127.0.0.1:5173)를 브라우저에서 열면 돼요. 5173 포트를 다른 프로그램이 쓰고 있으면 시작되지 않으니, 그때는 `npm run dev -- --port 5174`처럼 다른 포트를 지정하세요.
+Open the URL printed in the terminal, normally http://127.0.0.1:5173. If another program is using port 5173, the server will not start; select a different port with a command such as `npm run dev -- --port 5174`.
 
-| 명령 | 하는 일 |
+| Command | Description |
 |---|---|
-| `npm run dev` | 개발 서버 (코드를 고치면 바로 반영) |
-| `npm run build` | 배포용 파일을 `dist/`에 만들기 |
-| `npm run build:pages` | GitHub Pages용 파일을 `dist/`에 만들기 (해시 라우팅) |
-| `npm run preview` | 만든 `dist/`를 미리 보기 |
-| `npm run typecheck` | 타입 검사 |
-| `npm run lint` | 코드 스타일 검사 |
+| `npm run dev` | Start the development server with live updates |
+| `npm run build` | Generate production files in `dist/` |
+| `npm run build:pages` | Generate GitHub Pages files in `dist/` using hash routing |
+| `npm run preview` | Preview the generated `dist/` |
+| `npm run typecheck` | Check TypeScript types |
+| `npm run lint` | Run the code linter |
 
-`npm run check`(타입·빌드·스타일 검사를 한 번에)는 [Bun](https://bun.sh)이 설치돼 있어야 돼요.
+`npm run check`, which runs type, build, and lint checks together, requires [Bun](https://bun.sh).
 
-### 휴대폰에서 쓰려면
-- PC와 휴대폰이 같은 Wi-Fi일 때 `npm run dev -- --host`로 띄우고, 휴대폰에서 터미널에 나온 Network 주소를 열면 지판·퀴즈를 바로 써볼 수 있어요.
-- **조율 탭의 마이크는 HTTPS 주소(또는 localhost)에서만 켜져요.** 휴대폰에서 조율까지 쓰려면 HTTPS로 배포하세요.
-- 일반 빌드(`npm run build`)를 배포할 때는 `/quiz`, `/tuner` 주소로 바로 들어오거나 새로고침해도 열리도록, 모든 경로를 `index.html`로 돌려주는 설정(호스팅 서비스의 SPA / rewrite 설정)을 켜 주세요. GitHub Pages용 빌드는 아래처럼 별도로 제공해요.
+### Using a phone
+- With your computer and phone on the same Wi-Fi network, run `npm run dev -- --host` and open the Network URL shown in the terminal on your phone to try the fretboard and quiz.
+- **The tuner microphone requires HTTPS or localhost.** Deploy over HTTPS to use the tuner on your phone.
+- When deploying a standard build (`npm run build`), configure the host's SPA fallback or rewrite rules to serve `index.html` for every route, so direct visits and reloads at `/quiz` and `/tuner` work. A separate GitHub Pages build is available as described below.
 
 ### GitHub Pages
 
-npm은 빌드할 때만 필요해요. GitHub Pages에는 완성된 HTML·CSS·JavaScript만 올라가며, 별도 Node.js 서버나 Bun은 필요하지 않아요.
+npm is needed only at build time. GitHub Pages hosts the generated HTML, CSS, and JavaScript; no separate Node.js server or Bun installation is required.
 
-- 사이트: https://swannekim.github.io/bass-fretboard-note-trainer/
-- 퀴즈: https://swannekim.github.io/bass-fretboard-note-trainer/#/quiz
-- 조율: https://swannekim.github.io/bass-fretboard-note-trainer/#/tuner
+- App: https://swannekim.github.io/bass-fretboard-note-trainer/
+- Quiz: https://swannekim.github.io/bass-fretboard-note-trainer/#/quiz
+- Tuner: https://swannekim.github.io/bass-fretboard-note-trainer/#/tuner
 
-Pages 빌드는 `#/quiz`, `#/tuner`처럼 해시 라우팅을 사용해요. 링크를 직접 열거나 새로고침해도 서버 rewrite나 `404.html` 우회 없이 동작해요. HTTPS이므로 조율 탭에서 마이크 권한을 허용하면 마이크를 사용할 수 있어요.
+The Pages build uses hash routes such as `#/quiz` and `#/tuner`. Direct links and reloads work without server rewrites or a `404.html` workaround. Because the site uses HTTPS, the tuner can access the microphone once you grant permission.
 
-저장소의 **Settings → Pages → Build and deployment → Source**를 **GitHub Actions**로 설정하세요. `.github/workflows/deploy-pages.yml`이 `main`에 push할 때마다 npm 설치·타입 검사·Pages 빌드 후 `dist/`를 배포해요. **Actions → Deploy GitHub Pages → Run workflow**로 수동 배포도 가능해요.
+In the repository, set **Settings → Pages → Build and deployment → Source** to **GitHub Actions**. On each push to `main`, `.github/workflows/deploy-pages.yml` installs npm dependencies, checks types, builds for Pages, and deploys `dist/`. You can also deploy manually through **Actions → Deploy GitHub Pages → Run workflow**.
 
-로컬에서 Pages용 빌드를 미리 보려면:
+To preview a Pages build locally:
 
 ```bash
 npm ci
@@ -81,47 +83,47 @@ npm run build:pages
 npm run preview -- --base=/bass-fretboard-note-trainer/
 ```
 
-http://localhost:4173/bass-fretboard-note-trainer/ 에서 확인하세요. 자동 배포는 Pages 설정의 경로를 사용하고, 수동 빌드의 기본 경로는 `/bass-fretboard-note-trainer/`예요. 다른 경로는 Vite의 `--base` 옵션으로 지정할 수 있어요. 기존 `npm run dev`와 `npm run build`의 라우팅 방식은 그대로예요.
+Open http://localhost:4173/bass-fretboard-note-trainer/. Automated deployment uses the path from the Pages configuration; manual builds default to `/bass-fretboard-note-trainer/`. Use Vite's `--base` option for a different path. The existing routing behavior of `npm run dev` and `npm run build` is unchanged.
 
-## 코드 구조
+## Code structure
 
-이 앱의 기능을 담은 파일:
+Files implementing the app's features:
 
-| 파일 | 내용 |
+| File | Purpose |
 |---|---|
-| `src/pages/home.tsx` | 지판 탭 |
-| `src/pages/quiz.tsx` | 퀴즈 탭 |
-| `src/pages/tuner.tsx` | 조율 탭 |
-| `src/components/fretboard.tsx` | 지판 그리기 · 터치 처리 · 칸 강조 |
-| `src/components/trainer-tabs.tsx`, `src/components/pill.tsx` | 탭과 버튼 |
-| `src/lib/fretboard.ts` | 줄·프렛·음 모델, ♯/♭ 표기, 배치 계산 |
-| `src/lib/bass-audio.ts` | 베이스 소리 합성 |
-| `src/lib/quiz.ts` | 퀴즈 규칙(대표 위치, 채점, 재출제, 결과) |
-| `src/lib/pitch.ts` | 음정 검출(YIN) |
-| `src/lib/tuner.ts` | 조율 판정(센트 계산, 바늘 안정화, 통과 조건) |
-| `src/hooks/use-mic-tuner.ts` | 마이크 켜기 · 끄기 |
-| `src/hooks/use-trainer-chrome.ts` | 어두운 화면 고정 · 가로/세로 감지 |
-| `src/lib/store.ts` | 탭끼리 공유하는 설정(좌우 반전, 옥타브 등) |
-| `src/lib/nav.ts`, `src/routes.tsx` | 탭 목록과 페이지 연결 |
-| `src/index.css` | 색 · 테마 · 애니메이션 |
+| `src/pages/home.tsx` | Fretboard tab |
+| `src/pages/quiz.tsx` | Quiz tab |
+| `src/pages/tuner.tsx` | Tuner tab |
+| `src/components/fretboard.tsx` | Fretboard rendering, touch handling, and cell highlighting |
+| `src/components/trainer-tabs.tsx`, `src/components/pill.tsx` | Tabs and buttons |
+| `src/lib/fretboard.ts` | String, fret, and note model; sharp/flat notation; layout calculations |
+| `src/lib/bass-audio.ts` | Bass sound synthesis |
+| `src/lib/quiz.ts` | Quiz rules: reference positions, scoring, requeued questions, and results |
+| `src/lib/pitch.ts` | YIN pitch detection |
+| `src/lib/tuner.ts` | Tuning logic: cents calculation, needle stabilization, and pass conditions |
+| `src/hooks/use-mic-tuner.ts` | Microphone start and stop |
+| `src/hooks/use-trainer-chrome.ts` | Dark appearance and orientation detection |
+| `src/lib/store.ts` | Shared settings such as mirrored layout and octave shift |
+| `src/lib/nav.ts`, `src/routes.tsx` | Tab definitions and page routing |
+| `src/index.css` | Colors, theme, and animations |
 
-나머지(`src/components/ui/`, `src/lib/`의 다른 파일, `vite.config.ts`, `vite-dev-reload.ts` 등)는 앱 템플릿의 기본 구성이에요. 그중 일부는 이 앱을 처음 만든 미리보기·게시 환경과 연결하는 코드예요.
+The remaining files, including `src/components/ui/`, other files in `src/lib/`, `vite.config.ts`, and `vite-dev-reload.ts`, come from the app template. Some integrate with the preview and publishing environment where the app was originally created.
 
-기술: React 19 · TypeScript · Vite 7 · Tailwind CSS 4 · Zustand · React Router 7 · lucide-react · Web Audio API
+Built with React 19 · TypeScript · Vite 7 · Tailwind CSS 4 · Zustand · React Router 7 · lucide-react · Web Audio API.
 
 ## License
 
 Copyright (C) 2026 swannekim.
 
-이 프로젝트의 자체 코드는 **GNU Affero General Public License version 3 only (`AGPL-3.0-only`)**로 제공합니다. 전체 조건은 [LICENSE](LICENSE)를 참고하세요.
+The project's original code is provided under the **GNU Affero General Public License version 3 only (`AGPL-3.0-only`)**. See [LICENSE](LICENSE) for the full terms.
 
-- 라이선스에 따라 사용·수정·재배포할 수 있으며, 저작권·라이선스 고지를 유지해야 합니다.
-- 배포 시 라이선스가 적용되는 코드의 해당 소스를 AGPL 조건에 따라 제공해야 합니다.
-- 수정본을 네트워크를 통해 제공하면, 그 수정본과 상호작용하는 이용자에게 해당 소스를 받을 수 있는 방법을 제공해야 합니다.
-- 프로그램은 **어떠한 보증도 없이** 제공됩니다. 정확한 권리·의무와 면책 범위는 라이선스 전문을 따릅니다.
+- You may use, modify, and redistribute the software under the license, while preserving copyright and license notices.
+- When distributing covered code, you must provide its corresponding source under the AGPL's terms.
+- If you make a modified version available over a network, you must offer users interacting with that version a way to obtain its corresponding source.
+- The program is provided **without any warranty**. The full license governs the precise rights, obligations, and disclaimers.
 
-원본 소스: https://github.com/swannekim/bass-fretboard-note-trainer
+Original source: https://github.com/swannekim/bass-fretboard-note-trainer
 
-앱의 모든 탭에서 **소스 · AGPL** 링크로 소스와 라이선스를 확인할 수 있습니다. 포크한 수정본을 배포할 때는 `src/components/trainer-tabs.tsx`의 링크와 `vite.config.ts`의 소스 안내를 **실제로 제공하는 수정본의 해당 소스**로 변경하세요. 이 저장소를 가리키는 것만으로 수정본의 소스 제공 의무가 충족되지는 않습니다.
+Every app tab includes a **소스 · AGPL** ("Source · AGPL") link to the source code and license. When deploying a modified fork, update the link in `src/components/trainer-tabs.tsx` and the source notice in `vite.config.ts` to point to **the corresponding source of the modified version you actually provide**. Linking only to this upstream repository does not fulfill the source-offer obligation for your modifications.
 
-기존 템플릿·외부 라이브러리·폰트 등 제3자 구성요소의 기존 라이선스와 저작권 고지는 유지됩니다. 이 프로젝트의 라이선스가 제3자 구성요소의 원래 라이선스를 대체하지 않습니다. 빌드는 앱 라이선스(`LICENSE.txt`), Vite가 수집한 번들 의존성 고지(`THIRD_PARTY_LICENSES.txt`), Geist 폰트의 OFL 고지(`GEIST_LICENSE.txt`)를 `dist/`에 포함합니다.
+Existing licenses and copyright notices for third-party components, including the template, external libraries, and fonts, remain in effect. This project's license does not replace their original licenses. Builds include the app license (`LICENSE.txt`), bundled dependency notices collected by Vite (`THIRD_PARTY_LICENSES.txt`), and the Geist font's OFL notice (`GEIST_LICENSE.txt`) in `dist/`.
